@@ -1,0 +1,15 @@
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.nt.niranjana.spboot: DEBUG
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+  file:
+    name: C:/Users/Sreenivas Bandaru/Downloads/Sisu/Log files/springbootbytechie.log
+    max-size: 10MB
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher

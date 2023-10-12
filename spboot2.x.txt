@@ -1,0 +1,43 @@
+************SpBoot2.x(2.7.15)*************
+==============Actuator Configuration===============
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+=>In application.properties file, In 2.x only /actuator and /actuator/health is exposing,To enable all 14 endpoints like /info,/threaddump,/beans
+management.endpoints.web.exposure.include=*
+
+==========Swagger Configuration===============
+->using swagger tool,we can make documentation for whatever we created API
+->for API development
+->for API design
+->for API testing ->for API Governance ->for API Visualization
+Note: we make API documentation for client. we sent this API documentation to client/front-end developer so that they well known what are the methods.
+request type(GET/POST/PUT/DELETE)
+http://localhost:1313/swagger-ui.html
+======================JSONDOC===================
+=>To get the class data as html format
+https://mvnrepository.com/artifact/org.jsondoc/spring-boot-starter-jsondoc -->
+		<dependency>
+			<groupId>org.jsondoc</groupId>
+			<artifactId>spring-boot-starter-jsondoc</artifactId>
+			 <version>1.2.17</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jsondoc/jsondoc-ui-webjar -->
+		<!-- https://mvnrepository.com/artifact/org.jsondoc/jsondoc-ui-webjar -->
+<dependency>
+    <groupId>org.jsondoc</groupId>
+    <artifactId>jsondoc-ui-webjar</artifactId>
+    <version>1.2.17</version>
+</dependency>
+=>In application.Poperties file..
+#Generate HTML document for class package
+jsondoc.version=1.0
+jsondoc.base-path=http://localhost:1313
+jsondoc.packages[0]=com.nt.niranjana.spboot.entity
+jsondoc.packages[1]=com.nt.niranjana.spboot.controller
+http://localhost:1313/jsondoc-ui.html
+http://localhost:1313/jsondoc
+
+
+

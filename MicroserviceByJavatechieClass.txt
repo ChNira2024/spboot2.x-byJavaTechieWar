@@ -1,0 +1,501 @@
+*****MICROSERVICE*******
+ServiceRegistryWithEurekaServerOldVersion::-
+-----------------------------------------
+->We make this project as Eureka Server, so that all the project/application are configure with it , for this we follow the step:
+=>add dependency in pom.xml:-
+while creating spring boot project with version 2.7.5 ,from starter you select the dependency "Eureka Server" then in pom.xml
+automatically below dependency automatically..
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+</dependency>
+<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+</dependencyManagement>
+<spring-cloud.version>2021.0.8</spring-cloud.version> this one automatically added in  <propeties> tag.
+
+=>after dependency added, in main class we need add annotation i.e @EnableEurekaServer
+=>then we need config this project with Eureka server for that we need to write configuration in application.yml file..here we tell this is the Eureka server not client.
+#Give hostname/IP address to Eureka server
+eureka:
+  instance:
+    hostname: localhost
+  client:
+     register-with-eureka: false
+     fetch-registry: false
+     
+     
+server:
+   port: 8761
+
+Then starts the application and check the Eureka serevr is running or not with port 8761
+Orderr Service::-
+-------------------
+->We make this project as Eureka client, so that this project can communicate with Eureka server , for this we follow the step:
+=>add dependency in pom.xml:-
+while creating spring boot project with version 2.7.5 ,from starter you select the dependency "Eureka Discovery Client" then in pom.xml
+automatically below dependency automatically..
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+</dependencyManagement>
+<spring-cloud.version>2021.0.8</spring-cloud.version> this one automatically added in  <propeties> tag.
+
+=>after dependency added, in main class we need add annotation i.e @EnableEurekaClient
+=>then we need config our project with Eureka server for that we need to write configuration in application.yml file..here we tell to 
+server i.e this application is eureka client.
+#Eureka Server Configuration
+#eureka:
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#       default-zone: http://localhost:8761/eureka
+
+Then starts the application and check the Eureka serevr either this application is running on not.
+=>In Orderr main class,RestTemplate must be annotated with @LoadBalanced.
+In Spring Cloud and Spring Boot applications, the @LoadBalanced annotation is used in conjunction with the RestTemplate or WebClient to enable client-side load balancing. 
+This annotation is typically used when you have multiple instances of a service registered with a service registry (e.g., Eureka) 
+and you want to distribute client requests across those instances for load balancing and high availability.
+->if we run our application in multiple time then the  LoadBalancer maintain the multiple instances of microservices api with different port 
+@AutoWired
+private Entivorment env;
+return "port number is: "+env.getProperty("local.server.port)
+Paymentt Service::-
+-------------------
+->We make this project as Eureka client, so that this project can communicate with Eureka server , for this we follow the step:
+=>add dependency in pom.xml:-
+while creating spring boot project with version 2.7.5 ,from starter you select the dependency "Eureka Discovery Client" then in pom.xml
+automatically below dependency automatically..
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+</dependencyManagement>
+<spring-cloud.version>2021.0.8</spring-cloud.version> this one automatically added in  <propeties> tag.
+
+=>after dependency added, in main class we need add annotation i.e @EnableEurekaClient
+=>then we need config our project with Eureka server for that we need to write configuration in application.yml file..here we tell to 
+server i.e this application is eureka client.
+#Eureka Server Configuration
+#eureka:
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#       default-zone: http://localhost:8761/eureka
+
+Then starts the application and check the Eureka serevr either this application is running on not.
+
+Cloud Gateway Service::-
+-------------------
+What is APIGateway?
+An API Gateway is a server or service that acts as an entry point for a collection of microservices or backend services in a distributed architecture. 
+Its primary purpose is to manage, route, secure, and optimize API (Application Programming Interface) requests from clients.
+=>Key features and functions of an API Gateway include:
+Request Routing,Load Balancing,Authentication and Authorization,Rate Limiting,Logging,Security,Error Handling..
+->We make this project as Cloud Gateway and also Eureka client , This project has cloud gateway so that all the project can configure with this gateway.
+so that we can directly call the endpoint from gateway.
+=>To communicate with Eureka server and spring cloud gateway, for this we follow the step:
+=>add dependency in pom.xml:-
+while creating spring boot project with version 2.7.5 ,from starter you select the dependency "Eureka Discovery Client" and "spring cloud gateway" then in pom.xml
+automatically below dependency automatically..
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+</dependencyManagement>
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+<spring-cloud.version>2021.0.8</spring-cloud.version> this one automatically added in  <propeties> tag.
+
+=>after dependency added, in main class we need add annotation i.e @EnableEurekaClient
+=>then we need config our project with Eureka server for that we need to write configuration in application.yml file..here we tell to 
+server i.e this application is eureka client.
+#Eureka Server Configuration
+#eureka:
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#       default-zone: http://localhost:8761/eureka
+
+Then starts the application and check the Eureka serevr either this application is running on not.
+
+
+Note:Then To configure all the application/project/microservices in one gateway then we need write syntax in application.yml..see the below
+server:
+   port: 2000
+
+spring:
+  application:
+    name: CLOUD-GATEWAY
+  config:
+     import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      routes:
+      - id: order-service
+        uri: lb://ORDERR-SERVICE
+        predicates:
+        - Path=/order/**
+#        filters:
+#        - name: CircuitBreaker
+#          args:
+#            name: order-service
+#            fallbackuri: forward:/orderFallBack
+
+      - id: payment-service
+        uri: lb://PAYMENTT-SERVICE
+        predicates:
+        - Path=/payment/**
+#        filters:
+#        - name: CircuitBreaker
+#          args:
+#            name: payment-service
+#            fallbackuri: forward:/paymentFallBack
+
+#Eureka Server Configuration
+#eureka:
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#       default-zone: http://localhost:8761/eureka
+       
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: hystrix.stream
+#        
+#hystrix:
+#   command:
+#      fallbackcmd:
+#         execution:
+#            isolation:
+#               thread:
+#                  timeoutInMilliseconds: 5000
+
+http://localhost:9902/actuator/hystrix.stream
+http://localhost:9902/hystrix
+
+==============================================================================================
+*****************What is ELK?*****************
+=>log file is a text file so for searching the info,warning its difficult so that we use ELK.ELK show the dtails in visualization.
+=>elasticsearch is a NoSQL database that is based on the Luence search engine which wll helps us to store inputs/logs.(Collect the logs data)
+=>logstash is also pipeline tool that accepts inputs/logs from various sources,& exports the data to various targets.
+logtash is a open-source tool helps to collect the logs from different source and processing it and send to various output(it also called data pipeline)
+=>kibana is a visualization UI player, which helps developer to monitor application logs.
+Once log generated, then we give that log file to logstash for processing the log data then logtash wil give processed data to elasticsearch
+for storage the data. Then kibana pulling the data from elasticsearch and Visualize the data.
+ELK stands for:elastricsearch + logstash + kibana
+->These are three different component, we download these three component.
+->Extract these three component then first run elasticsearch from bin i.e
+C:\Users\Sreenivas Bandaru\Downloads\software\ELK\elasticsearch-8.9.1-windows-x86_64\elasticsearch-8.9.1\bin>elasticsearch.bat
+->to verify check localhost:9200 is the default port of elasticsearch
+->2nd step:before run kibana, we first open kibana.yml with notepad++ from config folder and uncomment elasticsearch.hosts: ["http://localhost:9200"]
+because kibana takes the logs from logstash and logtash takes from elasticsearch so that we need to say logs comming from elasticsearch.
+---------------------------------------------------------------------------
+Resilience4j features & modules::-
+->for Circuit Breaker(fault tolerance)
+->Rate Limiter(block too frequent request)
+->Time Limiter(set a time limit when calling remote operation)
+->Retry mechanism(Automatically retry a failed remote operation)
+->Bulkhead(avoid too manu concurrent request)
+->cache(store results of costly remote operation)
+if one of microservice id down then we need to handle with some valuable respond for that we need to use circuit breaker..
+->For Circuit breaker add below dependency in pom.xml.
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot2 -->
+<dependency>
+	<groupId>io.github.resilience4j</groupId>
+	<artifactId>resilience4j-spring-boot2</artifactId>
+</dependency>
+
+->then configure actuator and resilience4j for circuitbreaker in .yml file
+#Actuator,Circuit brfeaker,resilience4j
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+            
+resilience4j:
+  circuitbreaker:
+    instances:
+      bookOrderBreaker:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 6s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: count-based
+      fetchBookOrderBreaker:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 6s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: count-based
+  retry:
+    instances:
+      fetchBookOrderRetry:
+        max-attempts: 3
+        wait-duration: 5s       
+->state is closed means the given microservice ready to accept the request from orderr-service to paymentt-service.
+->failedcalls means how many time you try the failed/down service
+--------------------------------------------------------------------------
+***Splunk***
+->Splunk is an extremely powerful platform that is used to analyze data and logs produced by application.
+->Splunk allows you to monitor,search and analyze data and logs through a web interface.
+->If i have 10 microservices and we kept all logs in one file then it will create problem to debug which problem from which microservice.
+->So that we use Splunk.Splunk provides a UI.Using Splunk UI we can filter out the logs directly through the splunk dashboard.
+->Splunk segragate/filter/separate all the logs in each microservices by creating index like howmany microservices those many index .
+Eg: orderr_service_idx, payment_service_idx
+->so that we need to forward our application logs to Splunk using index.
+Q)How to connect our application with Splunk?
+To configure Splunk server in our application then we need to provide some details of Splunk server to our applicationl like..
+->URL: where your splunl server will redirect the logs.
+->Host: what is the host where you splunk server is running.
+->Token:What is the index you want to push your application logs.
+->Source:what is your source type(who will send your logs)
+->splunk download->product section->splunk enterprise download->fill the form
+niranjana.charty2013@gmail.com
+Niranjana
+Niranjan@12345678
+
+
+order-services-logs
+order_service_api_index(index)
+order-service-event-logs
+http://127.0.0.1:8000/en-US/app/launcher/home
+Login with username and password then go to setting choose "Data Iputs" the choose 
+"HTTP Event Collector" then click "Global Settings" click all token "enabled" the copy the port 8088 then "save"
+then click "New Token" then fill the name with "order-service-logs" the fill source name(can any name)
+"http-events-logs" then next.thenn select source type as "log4j" and create a new index like
+"order_api_dev" then click save then choose your index and click Review.
+    Token 
+Name
+    order-service-logs 
+Source name override
+    http-events-logs 
+Description
+    N/A 
+Enable indexer acknowledgements
+    No 
+Output Group
+    N/A 
+Allowed indexes
+Default index
+    order_api_dev 
+Source Type
+    log4j 
+App Context
+    launcher 
+then click submit.Again click Data inputs and check Http Event Collector.
+order-service-logs
+token: 51ed7457-56fb-4bf2-af84-8f462ecf563e 	
+source: log4j 	
+index: order_api_dev
+source name: http-events-logs
+->In our application
+<repositories>
+     <repository>
+         <id>splunk-artifactory</id>  
+         <name>Splunk Releases</name>
+         <url>https://splunk.jfrog.io/splunk/ext-releases-local</url>
+     </repository>
+ </repositories>
+ <!-- https://mvnrepository.com/artifact/com.splunk.logging/splunk-library-javalogging -->
+<dependency>
+    <groupId>com.splunk.logging</groupId>
+    <artifactId>splunk-library-javalogging</artifactId>
+    <version>1.6.2</version>
+    <scope>runtime</scope>
+</dependency>
+
+=>To start with splunk by command and directly...
+using command::-
+C:\WINDOWS\system32>cd C:\Program Files\Splunk
+
+C:\Program Files\Splunk>splunk start
+Checking prerequisites...
+        Checking http port [8000]: open
+        Checking mgmt port [8089]: open
+        Checking appserver port [127.0.0.1:8065]: open
+        Checking kvstore port [8191]: open
+        Checking configuration... Done.
+        Checking critical directories...        Done
+        Checking indexes...
+                (skipping validation of index paths because not running as LocalSystem)
+                Validated: _audit _configtracker _internal _introspection _metrics _metrics_rollup _telemetry _thefishbucket history main order_api_dev summary
+        Done
+        Checking filesystem compatibility...  Done
+        Checking conf files for problems...
+        Done
+        Checking default conf files for edits...
+        Validating installed files against hashes from 'C:\Program Files\Splunk\splunk-9.1.1-64e843ea36b1-windows-64-manifest'
+        All installed files intact.
+        Done
+All preliminary checks passed.
+
+Starting splunk server daemon (splunkd)...
+
+Splunkd: Starting (pid 12500)
+Done
+
+
+Waiting for web server at http://127.0.0.1:8000 to be available........ Done
+
+
+If you get stuck, we're here to help.
+Look for answers here: http://docs.splunk.com
+
+The Splunk web interface is at http://Win10--Dev01:8000
+=>then type in bbrowser http://127.0.0.1:8000/en-US/app/launcher/home
+
+Note: Search & Reporting->index="order_api_dev" or index="order_api_dev" Exception/FAILED and give the time duration
+===================================================================================================================
+******Apache Kafka® Tutorials for Beginners | What & Why Apache Kafka? Brief introduction | JavaTechie******
+->Apache kafka is a open source distributed event streaming platform.
+->Event->Request, Stream->Continious Process
+->Event Stream means continious sending request to the kafka server to get the data and process and chagne the data called Event Stream
+->distributed means we can distribute our kafka server in eveywhere so that any one will be down other can pickup.
+->Kafka was orgnally developed in LinkedIn and subsequently open sourced in early 2011.Now Kafka software comes under Apache Software founder.
+->Kafka Components:Producer,Consumer,Broker,Cluster
+->Producer publish the message/push the meaasge/events to Consumer
+->Consumer Receive the message /pull the message/events from Producer But they can't communicate each other directly.
+->Broker:To send the data from Producer to Consumer one middle man require i.e kafka server/Kafka Broker.
+kafka is just a server or an intermediate entity that helps in message exchange between a producer and a consumer.
+->Kafka Cluster means it just a server which handle all the Broker/Computer.Assume the Producer is sending huge amount of data ata time then single Broker can't able to handle so that here kafka cluster will separate the request 
+in different different Broker.
+->Topic:paytm sends lots of request i.e UPI payment,Card payment.Flight booking,Movie booking,Mobile booking,Mobile Recharge etc..then kafka Broker accept the all the request and keep it with it.
+when consumer ask give me payment related all the message then Kafka Broker will ask i have lots of message with me which one you need ?
+so here Topic Comes to the picture, here we can create the different Topic for storing the different messages like Payment topic,Booking Topic etc..when Producer push the Payment message then it will be stored in Payment Topic.
+->Offset:In a single topic the messages are partition in different number.Assume Consumer will be offline then Offset will be take care of which messages are already consumed by consumer.when consumer is online then Offset directly tells to him that from where you will starts the Consume.
+->Consumer Groups:
+->Zookeeper:kafka uses Zookeeper for coordination and to track the status of kafka nodes.it also track of kafka topics,partition,offsets,etc..
+ have used following concepts like Eureka,Hystrix,API Gateway,Config serverResiliance4j with CircuitBreaker and Retry,Splunk configuration,..etc
+->Zookeeper manages the states/data of Kafka.
+->Kafka cluster manages all the broker/server of kafka server.Inside broker all the topics are there.inside topic all data is present.Topics used for catagorize the message(diff.type of request) 
+To manage all the request,Then inside topic partitions are present so that we partition the lots of request through its index.
+OffSet is the position of your message inside the partition index starts with.
+
+=>Producer sendiing data as Object and Consumer receiving the data as object.But Karka needs byte[] of data so  that we convert the data from producer i.e object 
+to byte[] using concept Serialization so that Kafka server easily understand and in Consumer side we again convert byte[] data to Object using Deserialization concept.
+---Kafka Installation----
+https://www.apache.org/dyn/closer.cgi?path=/kafka/3.5.0/kafka_2.13-3.5.0.tgz download and extract
+https://www.confluent.io/installation/ (Community)
+https://www.kafkatool.com/download.html (Windows 64-Bit	34 MB	Download) download and extract
+
+Kafka Start process: To start kafka, we need to start Zookeeper then start Kafka server.
+Step1)To start Zookeeper from command line run below command:-
+C:\kafka_2.13-3.5.0>bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+after run the command, for comfirmation see the result:[2023-09-15 10:39:45,888] INFO binding to port 0.0.0.0/0.0.0.0:2181 (org.apache.zookeeper.server.NIOServerCnxnFactory)
+Step2)Then Start the kafka server in different command prompt..use below command
+C:\kafka_2.13-3.5.0>bin\windows\kafka-server-start.bat config\server.properties
+after run the command, for comfirmation see the result:[2023-09-15 10:45:30,447] INFO Awaiting socket connections on 0.0.0.0:9092. (kafka.network.DataPlaneAcceptor)
+Step3)Create a topic to store the events/messages/data...for create use below command
+C:\kafka_2.13-3.5.0>bin\windows\kafka-topics.bat --create --topic user-topic --partitions 3 --replication-factor 1 --bootstrap-server localhost:9092
+after run the command, for comfirmation see the result:Created topic user-topic.
+Step4)startproduce and push message into created topic...using below command
+C:\kafka_2.13-3.5.0>bin\windows\kafka-console-producer.bat --topic user-topic --bootstrap-server localhost:9092
+After run the command result:
+>hi
+>my name is niranjana
+Step5)start consume and read the message from created topic...using below command
+C:\kafka_2.13-3.5.0>bin\windows\kafka-console-consumer.bat --topic user-topic --from-beginning --bootstrap-server localhost:9092
+After run the command result:
+hi
+my name is niranjana
+Step6)After created topic and inserted message inside topic then see how many partition internally created by zookeeper 
+the data/message are in which partition and its names and index(all are take care by zookeeper only)..for this use below command..
+NOTE:Number of topic and number of partition create inside the Topic is deveoper hand but in which partition what kind od data ,how many data these thing decided by Zookeeper only.
+C:\kafka_2.13-3.5.0>bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --describe --topic location-update-topic
+Step7)list out all topic names
+C:\kafka_2.13-3.5.0>bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --list
+
+
+
+
+		
+Resilience4j Circuit Breaker Spring Boot Example | Resilience4j Circuit Breaker | by Ashwani |Part-7
+Microservice | Spring Cloud Eureka + Gateway + Hystrix | PART-4 | Javatechie
+Apache Kafka® Tutorials for Beginners | What & Why Apache Kafka? Brief introduction | JavaTechie
+Creating Entities and Tables Smart Contact Manager #4 | Spring Boot Tutorial Learn Code With Durgesh
+Spring Boot 3.0 New Features | Java Version Support in Hindi

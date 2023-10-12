@@ -1,0 +1,24 @@
+For Swagger Configuration,In spring boot parent version upto 2.7.1 with java 1.8/11v
+If you are using below two dependency:-
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger-ui</artifactId>
+    <version>2.9.1</version>
+</dependency> 
+	 https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 
+ <dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    <version>2.9.1</version>
+</dependency>
+Then you must add @EnableSwagger2 in top of Swagger Configuration class
+Then the url you must hit in browser is: http://localhost:5050/swagger-ui.html
+--------------------------------------------------------------------------
+If you are using below only one dependency:-
+	<dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-boot-starter</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+Then you must add @OpenAPIDefinition in top of Swagger Configuration class
+Then the url you must hit in browser is: http://localhost:5050/swagger-ui/index.html
