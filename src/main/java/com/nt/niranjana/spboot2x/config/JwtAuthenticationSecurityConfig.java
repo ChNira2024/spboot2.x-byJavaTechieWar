@@ -15,9 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.nt.niranjana.spboot2x.security.CustomUsersDetailsService;
 import com.nt.niranjana.spboot2x.security.JwtAuthenticationEntryPoint;
 import com.nt.niranjana.spboot2x.security.JwtAuthenticationFilter;
+import com.nt.niranjana.spboot2x.security.service.CustomUsersDetailsService;
 
 @Configuration
 @EnableWebSecurity

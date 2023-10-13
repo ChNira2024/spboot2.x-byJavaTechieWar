@@ -1,4 +1,4 @@
-package com.nt.niranjana.spboot2x.service;
+package com.nt.niranjana.spboot2x.security.service;
 
 import java.util.HashSet;
 import java.util.List;

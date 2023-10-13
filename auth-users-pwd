@@ -1,0 +1,15 @@
+ROLE_STAFF
+------------
+ ID: Raja PWD: raja
+ ID:Lokesh PWD: lokesh
+ 
+ROLE-EMPLOYEE
+---------------
+ID: Sisu PWD: sisu
+ID:Raja PWD: raja
+ID: Lokesh PWD: lokesh
+ID:Shyam PWD: shyam
+
+ROLE_ADMIN
+-------------
+ID:Niranjana PWD:niranjana

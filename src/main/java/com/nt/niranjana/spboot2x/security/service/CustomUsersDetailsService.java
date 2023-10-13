@@ -1,4 +1,4 @@
-package com.nt.niranjana.spboot2x.security;
+package com.nt.niranjana.spboot2x.security.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

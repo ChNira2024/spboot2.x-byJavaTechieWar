@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nt.niranjana.spboot2x.entity.UsersData;
-import com.nt.niranjana.spboot2x.service.UserService;
+import com.nt.niranjana.spboot2x.security.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
 
