@@ -7,10 +7,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @SpringBootApplication
-public class SpBootSpBoot2xByJavaTechieWar {
+public class SpBoot2xByJavaTechieWar {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpBootSpBoot2xByJavaTechieWar.class, args);
+		SpringApplication.run(SpBoot2xByJavaTechieWar.class, args);
 		System.out.println("Swagger Application Started Successfully...");
 	}
 	
